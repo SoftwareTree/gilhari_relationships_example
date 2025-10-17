@@ -1,0 +1,75 @@
+JDX_DATABASE JDX:jdbc:sqlite:./config/json_relationships_example.db;USER=sa;PASSWORD=sa;JDX_DBTYPE=SQLITE;DEBUG_LEVEL=5;
+JDBC_DRIVER org.sqlite.JDBC
+
+// Please see JDX_DATABASE_JDBC_DRIVER_Specification_Guide (.md or .html) file for 
+// a guide to use different databases (e.g., Postgres or MySQL) in the mapping file.
+
+OBJECT_MODEL_OVERVIEW This object model describes one-to-one (between A and B) and one-to-many (between A and C) relationships
+
+JDX_OBJECT_MODEL_PACKAGE com.softwaretree.jdxjson2example.model
+;
+REM ************************************************************************
+
+CLASS .A TABLE A
+ 
+   // Below is an example of specifying caching (with pre-population) for the objects of this class
+   // Currently commented out
+   // CACHE MODE READONLY PRE_POPULATE 'aId>0'
+
+   // First declare all the persistent JSON properties using VIRTUAL_ATTRIB specifications
+   VIRTUAL_ATTRIB aId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB aString ATTRIB_TYPE java.lang.String
+   VIRTUAL_ATTRIB aBoolean ATTRIB_TYPE boolean
+   VIRTUAL_ATTRIB aFloat ATTRIB_TYPE double
+   VIRTUAL_ATTRIB aDate ATTRIB_TYPE long
+
+   // Now provide the rest of the mapping specification for this class
+   PRIMARY_KEY aId 
+   // SQLMAP FOR aDate SQLTYPE DATETIME
+
+   RELATIONSHIP aB REFERENCES .B BYVALUE REFERENCED_KEY parentId WITH aId
+   // RELATIONSHIP aB REFERENCES .B INLINE AUTO_INSTANTIATE
+   RELATIONSHIP aCs REFERENCES ArrayC BYVALUE WITH aId
+;
+
+CLASS .B TABLE B
+
+   // Below is an example of specifying caching for the objects of this class
+   // Currently commented out
+   // CACHE MODE READONLY
+
+   // First declare all the persistent JSON properties using VIRTUAL_ATTRIB specifications
+   VIRTUAL_ATTRIB bId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB aId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB bInt ATTRIB_TYPE int
+   VIRTUAL_ATTRIB bString ATTRIB_TYPE java.lang.String
+   
+   // Now provide the rest of the mapping specification for this class
+   PRIMARY_KEY bId 
+   REFERENCE_KEY parentId aId
+;
+
+CLASS .C TABLE C
+
+   // Below is an example of specifying caching for the objects of this class
+   // Currently commented out
+   // CACHE MODE READONLY
+
+   // First declare all the persistent JSON properties using VIRTUAL_ATTRIB specifications
+   VIRTUAL_ATTRIB cId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB aId ATTRIB_TYPE int
+   VIRTUAL_ATTRIB cInt ATTRIB_TYPE int
+   VIRTUAL_ATTRIB cString ATTRIB_TYPE java.lang.String
+   
+   // Now provide the rest of the mapping specification for this class
+   PRIMARY_KEY cId 
+;
+
+COLLECTION_CLASS ArrayC COLLECTION_TYPE ARRAY ELEMENT_CLASS .C
+    PRIMARY_KEY aId 
+;
+
+
+
+
+

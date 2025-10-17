@@ -1,0 +1,123 @@
+Relationships example:
+
+For GraphQL Semantics:
+
+In the Body of a GET request:
+
+
+// Example 1 (projections, follow) for a shallow query
+
+{
+    "operationDetails": [
+        {
+            "opType": "projections",
+            "projectionsDetails": [
+                {
+                    "type": "C",
+                    "attribs": [
+                        "aId",
+                        "cId",
+                        "cString"
+                    ]
+                },
+                                {
+                    "type": "B",
+                    "attribs": [
+                        "aId",
+                        "bId"
+                    ]
+                },
+                {
+                    "type": "A",
+                    "attribs": [
+                        "aId",
+                        "aString"
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "opType": "follow",
+            "references": ["A", "aCs"]
+        }
+    ]
+}
+
+
+// Example 2 (projections, ignore) for a deep query
+
+
+{
+    "operationDetails": [
+        {
+            "opType": "projections",
+            "projectionsDetails": [
+                {
+                    "type": "B",
+                    "attribs": [
+                        "aId",
+                        "bId"
+                    ]
+                },
+                {
+                    "type": "A",
+                    "attribs": [
+                        "aId",
+                        "aString"
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "opType": "ignore",
+            "references": ["A", "aCs"]
+        }
+    ]
+}
+
+// Example 3 (projections, ignore, filters) for a deep query
+
+{
+    "operationDetails": [
+        {
+            "opType": "projections",
+            "projectionsDetails": [
+                {
+                    "type": "B",
+                    "attribs": [
+                        "aId",
+                        "bId",
+                        "bInt"
+                    ]
+                },
+                {
+                    "type": "A",
+                    "attribs": [
+                        "aId",
+                        "aString"
+                        
+                    ]
+                }
+            ]
+        },
+        {
+            "opType": "ignore",
+            "references": ["A", "aCs"]
+        },
+        {
+            "opType": "filters",
+            "predicates": [
+                {
+                    "type": "A",
+                    "predicate": "aString > 'aString_0'"
+                },
+                {
+                    "type": "B",
+                    "predicate": "bInt > 100"
+                }
+            ]
+        }
+    ]
+}

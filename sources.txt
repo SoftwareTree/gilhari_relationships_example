@@ -1,0 +1,4 @@
+./src/com/softwaretree/jdxjson2example/model/A.java
+./src/com/softwaretree/jdxjson2example/model/B.java
+./src/com/softwaretree/jdxjson2example/model/C.java
+

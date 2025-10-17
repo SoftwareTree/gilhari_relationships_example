@@ -1,0 +1,20 @@
+An A object with one B object and an array of two C objects:
+
+{"aId":1,"aString":"aString_1","aBoolean":true,"aFloat":1.1,"aDate":347184000000,"aB":{"bId":100,"aId":1,"bInt":100,"bString":"bString_1"},"aCs":[{"cId":1000,"aId":1,"cInt":100,"cString":"cString_1"},{"cId":2000,"aId":1,"cInt":200,"cString":"cString_2"}]}
+
+POST body for the above example:
+---------------------------------
+{"entity":{"aId":1,"aString":"aString_1","aBoolean":true,"aFloat":1.1,"aDate":347184000000,"aB":{"bId":100,"aId":1,"bInt":100,"bString":"bString_1"},"aCs":[{"cId":1000,"aId":1,"cInt":100,"cString":"cString_1"},{"cId":2000,"aId":1,"cInt":200,"cString":"cString_2"}]}}
+
+Curl command for the above example:
+-----------------------------------
+curl -X POST  http://localhost:80/jdx/v1/A
+  -H "Content-Type: application/json"  -H "cache-control: no-cache" -d "{\"entity\":{\"aId\":1,\"aString\":\"aString_1\",\"aBoolean\":true,\"aFloat\":1.1,\"aDate\":347184000000,\"aB\":{\"bId\":100,\"aId\":1,\"bInt\":100,\"bString\":\"bString_1\"},\"aCs\":[{\"cId\":1000,\"aId\":1,\"cInt\":100,\"cString\":\"cString_1\"},{\"cId\":2000,\"aId\":1,\"cInt\":200,\"cString\":\"cString_2\"}]}}"
+
+
+For GET requet:
+---------------
+
+http://localhost:8081/gilhari/v1/A
+http://localhost:8081/gilhari/v1/A?deep=false
+http://localhost:8081/gilhari/v1/A?filter=jdxObject.aB.bInt=100
