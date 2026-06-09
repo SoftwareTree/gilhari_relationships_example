@@ -117,7 +117,7 @@ gilhari_relationships_example/
 │   └── com/softwaretree/...      # A.java, B.java, C.java
 ├── config/                        # Configuration files
 │   ├── gilhari_relationships_example.jdx  # ORM specification with BYVALUE relationships
-│   └── classnames_map_example.js
+│   └── classnames_map_example.json
 ├── bin/                           # Compiled .class files
 ├── Dockerfile                     # Docker image definition
 ├── gilhari_service.config         # Service configuration
@@ -215,7 +215,7 @@ The `gilhari_service.config` file specifies runtime parameters for the RESTful G
   "jdx_debug_level": 5,
   "jdx_force_create_schema": "true",
   "jdx_persistent_classes_location": "./bin",
-  "classnames_map_file": "config/classnames_map_example.js",
+  "classnames_map_file": "config/classnames_map_example.json",
   "gilhari_rest_server_port": 8081
 }
 ```
